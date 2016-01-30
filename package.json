@@ -1,0 +1,53 @@
+{
+  "name": "spawn-require",
+  "version": "0.0.0",
+  "description": "user-land --require flag equivalent that can handle forked processes",
+  "license": "MIT",
+  "repository": "jamestalmage/spawn-require",
+  "author": {
+    "name": "James Talmage",
+    "email": "james@talmage.io",
+    "url": "github.com/jamestalmage"
+  },
+  "bin": "cli.js",
+  "engines": {
+    "node": ">=0.10.0"
+  },
+  "scripts": {
+    "test": "xo && ava",
+    "usage": "node ./cli.js ./test/fixtures/foo ./test/fixtures/bar -- node ./test/fixtures/child-1.js"
+  },
+  "files": [
+    "index.js",
+    "wrapper.js",
+    "cli.js"
+  ],
+  "keywords": [
+    "cli-app",
+    "cli",
+    "require",
+    "hook",
+    "register",
+    "fork",
+    "child",
+    "process",
+    "babel",
+    "coffee"
+  ],
+  "dependencies": {
+    "foreground-child": "^1.3.5",
+    "resolve-cwd": "^1.0.0",
+    "spawn-wrap": "^1.1.1"
+  },
+  "devDependencies": {
+    "ava": "^0.11.0",
+    "babel-core": "^6.4.5",
+    "babel-polyfill": "^6.3.14",
+    "babel-preset-es2015": "^6.3.13",
+    "babel-preset-stage-3": "^6.3.13",
+    "babel-register": "^6.4.3",
+    "babel-runtime": "^6.3.19",
+    "delay": "^1.3.1",
+    "xo": "^0.12.1"
+  }
+}
