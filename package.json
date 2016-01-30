@@ -1,6 +1,6 @@
 {
   "name": "spawn-require",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "user-land --require flag equivalent that can handle forked processes",
   "license": "MIT",
   "repository": "jamestalmage/spawn-require",
