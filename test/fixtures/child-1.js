@@ -10,7 +10,7 @@ function send(data) {
 		process.send(data);
 		return;
 	}
-	console.log('data: ', data);
+	console.log('data: ' +  JSON.stringify(data));
 }
 
 send({

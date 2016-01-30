@@ -1,8 +1,8 @@
 import test from 'ava';
 import fn from '../';
-import {fork} from 'child_process';
+import {fork, exec} from 'child_process';
 
-test.serial.cb(t => {
+test.serial.cb('fork', t => {
 	t.plan(3);
 
 	t.context = fn([
@@ -24,7 +24,26 @@ test.serial.cb(t => {
 		});
 });
 
-test.serial.cb(t => {
+test.serial.cb('exec', t => {
+	t.plan(2);
+
+	t.context = fn([
+		require.resolve('./fixtures/foo'),
+		require.resolve('./fixtures/bar')
+	]);
+
+	exec('node ' + require.resolve('./fixtures/child-1.js'), (err, stdout) => {
+		t.ifError(err);
+		var lines = stdout.split('\n').map(line => line.replace(/^\s*data:\s*/, ''));
+		t.same(JSON.parse(lines[0]), {
+			passed: 'child-1',
+			shared: ['foo', 'bar']
+		});
+		t.end();
+	});
+});
+
+test.serial.cb('babel', t => {
 	t.plan(1);
 
 	t.context = fn(['babel-register', 'babel-polyfill']);
