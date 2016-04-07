@@ -14,11 +14,11 @@ test.serial.cb('fork', t => {
 		.on('message', function (data) {
 			if (data.passed === 'child-1') {
 				t.pass('child 1 passed');
-				t.same(data.shared, ['foo', 'bar']);
+				t.deepEqual(data.shared, ['foo', 'bar']);
 			}
 
 			if (data.passed === 'child-2') {
-				t.same(data.shared, ['foo', 'bar']);
+				t.deepEqual(data.shared, ['foo', 'bar']);
 				t.end();
 			}
 		});
@@ -35,7 +35,7 @@ test.serial.cb('exec', t => {
 	exec('node ' + require.resolve('./fixtures/child-1.js'), (err, stdout) => {
 		t.ifError(err);
 		var lines = stdout.split('\n').map(line => line.replace(/^\s*data:\s*/, ''));
-		t.same(JSON.parse(lines[0]), {
+		t.deepEqual(JSON.parse(lines[0]), {
 			passed: 'child-1',
 			shared: ['foo', 'bar']
 		});
@@ -50,7 +50,7 @@ test.serial.cb('babel', t => {
 
 	fork(require.resolve('./fixtures/babel'))
 		.on('message', function (data) {
-			t.same(data, {
+			t.deepEqual(data, {
 				passed: 'babel',
 				shared: []
 			});
